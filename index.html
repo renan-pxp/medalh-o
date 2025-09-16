@@ -1,11 +1,288 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Medalhão de Recompensa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .title {
+            color: #fff;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .medal-container {
+            position: relative;
+            display: inline-block;
+            margin: 2rem 0;
+        }
+
+        .medal {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle at 30% 30%, #ffd700, #ffb347, #ff8c00, #b8860b);
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 
+                0 0 30px rgba(255, 215, 0, 0.6),
+                0 0 60px rgba(255, 215, 0, 0.4),
+                inset 0 0 20px rgba(255, 255, 255, 0.3);
+            animation: shine 3s ease-in-out infinite;
+            border: 8px solid #b8860b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .medal::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #ffd700, #ffb347, #ff8c00, #b8860b, #ffd700);
+            z-index: -1;
+            animation: rotate 4s linear infinite;
+        }
+
+        .medal-inner {
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle at 40% 40%, #fff9c4, #ffd700, #ffb347);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 0 15px rgba(184, 134, 11, 0.3);
+            position: relative;
+        }
+
+        .medal-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #8b4513;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+            max-width: 120px;
+            word-wrap: break-word;
+            line-height: 1.2;
+        }
+
+        .ribbon {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 80px;
+            background: linear-gradient(45deg, #dc143c, #b22222);
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .input-section {
+            margin-top: 3rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 1rem;
+            border: 2px solid #ffd700;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #ffb347;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            transform: scale(1.02);
+        }
+
+        .update-btn {
+            background: linear-gradient(45deg, #ffd700, #ffb347);
+            color: #8b4513;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .update-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+            background: linear-gradient(45deg, #ffb347, #ffd700);
+        }
+
+        @keyframes shine {
+            0%, 100% {
+                box-shadow: 
+                    0 0 30px rgba(255, 215, 0, 0.6),
+                    0 0 60px rgba(255, 215, 0, 0.4),
+                    inset 0 0 20px rgba(255, 255, 255, 0.3);
+            }
+            50% {
+                box-shadow: 
+                    0 0 40px rgba(255, 215, 0, 0.8),
+                    0 0 80px rgba(255, 215, 0, 0.6),
+                    inset 0 0 25px rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+            
+            .medal {
+                width: 160px;
+                height: 160px;
+            }
+            
+            .medal-inner {
+                width: 130px;
+                height: 130px;
+            }
+            
+            .medal-text {
+                font-size: 1rem;
+                max-width: 100px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1 class="title">🏆 Medalhão de Recompensa 🏆</h1>
+        
+        <div class="medal-container">
+            <div class="ribbon"></div>
+            <div class="medal">
+                <div class="medal-inner">
+                    <div class="medal-text" id="medalText">CAMPEÃO</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-section">
+            <div class="input-group">
+                <label for="nameInput">Digite o nome para o medalhão:</label>
+                <input type="text" id="nameInput" placeholder="Ex: João Silva" maxlength="20">
+            </div>
+            <button class="update-btn" onclick="updateMedal()">✨ Atualizar Medalhão</button>
+        </div>
+    </div>
+
+    <script>
+        function updateMedal() {
+            const nameInput = document.getElementById('nameInput');
+            const medalText = document.getElementById('medalText');
+            const name = nameInput.value.trim();
+            
+            if (name) {
+                medalText.textContent = name.toUpperCase();
+                
+                // Adiciona um efeito de brilho extra quando atualiza
+                const medal = document.querySelector('.medal');
+                medal.style.animation = 'none';
+                setTimeout(() => {
+                    medal.style.animation = 'shine 3s ease-in-out infinite';
+                }, 10);
+                
+                // Limpa o campo de input
+                nameInput.value = '';
+                
+                // Feedback visual
+                const button = document.querySelector('.update-btn');
+                const originalText = button.textContent;
+                button.textContent = '✅ Atualizado!';
+                button.style.background = 'linear-gradient(45deg, #32cd32, #90ee90)';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = 'linear-gradient(45deg, #ffd700, #ffb347)';
+                }, 2000);
+            } else {
+                alert('Por favor, digite um nome para o medalhão!');
+                nameInput.focus();
+            }
+        }
+
+        // Permite atualizar pressionando Enter
+        document.getElementById('nameInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                updateMedal();
+            }
+        });
+
+        // Efeito de digitação em tempo real (opcional)
+        document.getElementById('nameInput').addEventListener('input', function(e) {
+            const medalText = document.getElementById('medalText');
+            const value = e.target.value.trim();
+            if (value) {
+                medalText.textContent = value.toUpperCase();
+            } else {
+                medalText.textContent = 'CAMPEÃO';
+            }
+        });
     
-</body>
+</script></body>
 </html>
